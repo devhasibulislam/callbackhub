@@ -11,13 +11,13 @@ app.use(express.json());
 
 /* router level connections */
 // global server initial call handler
-app.use("/api/callback", (req, res, next) => {
+app.use("/", (req, res, next) => {
   try {
     res.json({
       status: res.statusCode,
       acknowledgement: true,
       message: "success",
-      data: req.query,
+      description: "hello from server",
     });
   } catch (error) {
     next(error);
