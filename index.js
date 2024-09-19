@@ -11,7 +11,7 @@ app.use(express.json());
 
 /* router level connections */
 // global server initial call handler
-app.use("/", (req, res, next) => {
+app.get("/", (req, res, next) => {
   try {
     res.json({
       status: res.statusCode,
@@ -31,7 +31,7 @@ app.use("/", (req, res, next) => {
 });
 
 /* global callback handler */
-app.use("/api/callback", (req, res, next) => {
+app.get("/api/callback", (req, res, next) => {
   try {
     res.json({
       status: res.statusCode,
