@@ -10,7 +10,28 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 /* router level connections */
-app.use("/api/sessions/oauth/google", (req, res, next) => {
+// global server initial call handler
+app.use("/api/callback", (req, res, next) => {
+  try {
+    res.json({
+      status: res.statusCode,
+      acknowledgement: true,
+      message: "success",
+      data: req.query,
+    });
+  } catch (error) {
+    next(error);
+  } finally {
+    console.log({
+      status: res.statusCode,
+      method: req.method,
+      route: `${req.protocol}://${req.get("host")}${req.originalUrl}`,
+    });
+  }
+});
+
+/* global callback handler */
+app.use("/api/callback", (req, res, next) => {
   try {
     res.json({
       status: res.statusCode,
